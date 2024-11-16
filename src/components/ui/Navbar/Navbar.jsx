@@ -1,18 +1,43 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
-import React from "react";
+import {
+  FiHome,
+  FiSmartphone,
+  FiInfo,
+  FiMail,
+  FiSun,
+  FiMoon,
+} from "react-icons/fi";
+import { GiNewspaper } from "react-icons/gi";
 
 const navItems = [
-  { title: "Home", path: "/" },
-  { title: "Services", path: "/services" },
-  { title: "Blog", path: "/blog" },
-  { title: "Contact Us", path: "/contact" },
-  { title: "About", path: "/about" },
+  { title: "Home", path: "/", icon: <FiHome className="text-xl" /> },
+  {
+    title: "Best Earning App",
+    path: "/earning-apps",
+    icon: <FiSmartphone className="text-xl" />,
+  },
+  { title: "News", path: "/news", icon: <GiNewspaper className="text-xl" /> },
+  { title: "About Us", path: "/about", icon: <FiInfo className="text-xl" /> },
+  {
+    title: "Contact Us",
+    path: "/contact",
+    icon: <FiMail className="text-xl" />,
+  },
 ];
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isDark, setIsDark] = useState(false);
+
+  useEffect(() => {
+    if (isDark) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [isDark]);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -21,19 +46,11 @@ const Navbar = () => {
   const menuVariants = {
     closed: {
       x: "-100%",
-      transition: {
-        type: "spring",
-        stiffness: 400,
-        damping: 40,
-      },
+      transition: { type: "spring", stiffness: 300, damping: 30 },
     },
     open: {
       x: 0,
-      transition: {
-        type: "spring",
-        stiffness: 400,
-        damping: 40,
-      },
+      transition: { type: "spring", stiffness: 300, damping: 30 },
     },
   };
 
@@ -42,53 +59,81 @@ const Navbar = () => {
     open: (i) => ({
       opacity: 1,
       x: 0,
-      transition: {
-        delay: i * 0.1,
-      },
+      transition: { delay: i * 0.1 },
     }),
   };
 
   return (
-    <nav className="bg-white shadow-md fixed w-full z-50">
-      <div className="container px-4 sm:px-6 lg:px-8">
+    <nav className="bg-white dark:bg-gray-900 shadow-md fixed w-full z-50 transition-colors duration-300">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <Link to="/" className="text-2xl font-bold text-indigo-600">
+            <Link
+              to="/"
+              className="text-2xl font-bold bg-gradient-to-r from-green-500 to-blue-600 bg-clip-text text-transparent hover:from-green-600 hover:to-blue-700 transition-all duration-300"
+            >
               Excellent Earning
             </Link>
           </div>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex space-x-8">
+          <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
               <Link
                 key={item.path}
                 to={item.path}
-                className="text-gray-700 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200"
+                className="flex items-center space-x-2 text-gray-700 dark:text-gray-200 hover:text-green-600 dark:hover:text-green-400 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200"
               >
-                {item.title}
+                {item.icon}
+                <span>{item.title}</span>
               </Link>
             ))}
+
+            {/* Dark Mode Toggle */}
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setIsDark(!isDark)}
+              className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200"
+            >
+              {isDark ? (
+                <FiSun className="text-xl text-yellow-400" />
+              ) : (
+                <FiMoon className="text-xl text-gray-600" />
+              )}
+            </motion.button>
           </div>
 
-          {/* Hamburger Button */}
-          <div className="md:hidden">
+          {/* Mobile Menu Button */}
+          <div className="md:hidden flex items-center space-x-4">
+            <motion.button
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setIsDark(!isDark)}
+              className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800"
+            >
+              {isDark ? (
+                <FiSun className="text-xl text-yellow-400" />
+              ) : (
+                <FiMoon className="text-xl text-gray-600" />
+              )}
+            </motion.button>
+
             <button
               onClick={toggleMenu}
-              className="flex flex-col space-y-1.5 p-2 rounded-md hover:bg-gray-100 focus:outline-none"
+              className="flex flex-col space-y-1.5 p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none"
             >
               <motion.span
                 animate={isOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }}
-                className="w-6 h-0.5 bg-gray-600 block"
+                className="w-6 h-0.5 bg-gray-600 dark:bg-gray-300 block"
               />
               <motion.span
                 animate={isOpen ? { opacity: 0 } : { opacity: 1 }}
-                className="w-6 h-0.5 bg-gray-600 block"
+                className="w-6 h-0.5 bg-gray-600 dark:bg-gray-300 block"
               />
               <motion.span
                 animate={isOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }}
-                className="w-6 h-0.5 bg-gray-600 block"
+                className="w-6 h-0.5 bg-gray-600 dark:bg-gray-300 block"
               />
             </button>
           </div>
@@ -103,17 +148,18 @@ const Navbar = () => {
             animate="open"
             exit="closed"
             variants={menuVariants}
-            className="md:hidden fixed top-16 left-0 w-64 h-screen bg-white shadow-lg"
+            className="md:hidden fixed top-16 left-0 w-72 h-screen bg-white dark:bg-gray-900 shadow-lg"
           >
             <div className="px-2 pt-2 pb-3 space-y-1">
               {navItems.map((item, i) => (
                 <motion.div key={item.path} custom={i} variants={linkVariants}>
                   <Link
                     to={item.path}
-                    className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-indigo-600 hover:bg-gray-50 transition-colors duration-200"
+                    className="flex items-center space-x-3 px-4 py-3 rounded-md text-base font-medium text-gray-700 dark:text-gray-200 hover:text-green-600 dark:hover:text-green-400 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors duration-200"
                     onClick={() => setIsOpen(false)}
                   >
-                    {item.title}
+                    {item.icon}
+                    <span>{item.title}</span>
                   </Link>
                 </motion.div>
               ))}
