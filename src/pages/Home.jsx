@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
-import HeroSection from "../components/home/HeroSection";
-import ServicesSection from "../components/home/ServicesSection";
-import FeaturesSection from "../components/home/FeaturesSection";
+import HeroSection from "../components/Home/HeroSection";
+import ServicesSection from "../components/Home/ServicesSection";
+import FeaturesSection from "../components/Home/FeaturesSection";
 import LatestAppsSection from "../components/Home/LatestAppsSection";
 import TopRatedAppsSection from "../components/Home/TopRatedAppsSection";
 
