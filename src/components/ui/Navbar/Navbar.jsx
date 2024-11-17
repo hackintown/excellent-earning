@@ -64,14 +64,14 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-white dark:bg-gray-900 shadow-md fixed w-full z-50 transition-colors duration-300">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <nav className="bg-background border-b border-border shadow-sm fixed w-full z-50 transition-colors duration-300">
+      <div className="container">
         <div className="flex justify-between h-16 items-center">
           {/* Logo */}
           <div className="flex-shrink-0">
             <Link
               to="/"
-              className="text-2xl font-bold bg-gradient-to-r from-green-500 to-blue-600 bg-clip-text text-transparent hover:from-green-600 hover:to-blue-700 transition-all duration-300"
+              className="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent hover:from-primary/90 hover:to-secondary/90 transition-all duration-300"
             >
               Excellent Earning
             </Link>
@@ -83,7 +83,7 @@ const Navbar = () => {
               <Link
                 key={item.path}
                 to={item.path}
-                className="flex items-center space-x-2 text-gray-700 dark:text-gray-200 hover:text-green-600 dark:hover:text-green-400 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200"
+                className="flex items-center space-x-2 text-muted-foreground hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200"
               >
                 {item.icon}
                 <span>{item.title}</span>
@@ -95,12 +95,12 @@ const Navbar = () => {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => setIsDark(!isDark)}
-              className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200"
+              className="p-2 rounded-full hover:bg-muted transition-colors duration-200"
             >
               {isDark ? (
-                <FiSun className="text-xl text-yellow-400" />
+                <FiSun className="text-xl text-warning" />
               ) : (
-                <FiMoon className="text-xl text-gray-600" />
+                <FiMoon className="text-xl text-accent" />
               )}
             </motion.button>
           </div>
@@ -110,12 +110,12 @@ const Navbar = () => {
             <motion.button
               whileTap={{ scale: 0.95 }}
               onClick={() => setIsDark(!isDark)}
-              className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800"
+              className="p-2 rounded-full hover:bg-muted"
             >
               {isDark ? (
-                <FiSun className="text-xl text-yellow-400" />
+                <FiSun className="text-xl text-warning" />
               ) : (
-                <FiMoon className="text-xl text-gray-600" />
+                <FiMoon className="text-xl text-accent" />
               )}
             </motion.button>
 
@@ -148,14 +148,14 @@ const Navbar = () => {
             animate="open"
             exit="closed"
             variants={menuVariants}
-            className="md:hidden fixed top-16 left-0 w-72 h-screen bg-white dark:bg-gray-900 shadow-lg"
+            className="md:hidden fixed top-16 left-0 w-72 h-screen bg-background border-r border-border shadow-lg"
           >
             <div className="px-2 pt-2 pb-3 space-y-1">
               {navItems.map((item, i) => (
                 <motion.div key={item.path} custom={i} variants={linkVariants}>
                   <Link
                     to={item.path}
-                    className="flex items-center space-x-3 px-4 py-3 rounded-md text-base font-medium text-gray-700 dark:text-gray-200 hover:text-green-600 dark:hover:text-green-400 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors duration-200"
+                    className="flex items-center space-x-3 px-4 py-3 rounded-md text-base font-medium text-muted-foreground hover:text-primary hover:bg-muted transition-colors duration-200"
                     onClick={() => setIsOpen(false)}
                   >
                     {item.icon}

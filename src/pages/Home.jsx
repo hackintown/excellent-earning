@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import HeroSection from "../components/home/HeroSection";
 import ServicesSection from "../components/home/ServicesSection";
 import FeaturesSection from "../components/home/FeaturesSection";
-import CTASection from "../components/home/CTASection";
 import LatestAppsSection from "../components/Home/LatestAppsSection";
 import TopRatedAppsSection from "../components/Home/TopRatedAppsSection";
 
@@ -18,7 +17,6 @@ const Home = () => {
       <LatestAppsSection />
       <ServicesSection />
       <FeaturesSection />
-      <CTASection />
     </motion.div>
   );
 };

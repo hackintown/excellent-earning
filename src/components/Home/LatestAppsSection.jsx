@@ -145,32 +145,32 @@ const LatestAppsSection = () => {
   };
 
   return (
-    <section className="py-16 px-4 bg-gradient-to-b from-gray-50 to-white">
-      <div className="max-w-7xl mx-auto">
+    <section className="relative py-16 px-4 bg-gradient-to-b from-card to-background">
+      <div className="max-w-7xl mx-auto relative">
         {/* Header and Search Section */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="flex flex-col md:flex-row justify-between items-center mb-8"
+          className="flex flex-col sm:flex-row justify-between items-center mb-8"
         >
-          <h2 className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+          <h2 className="text-4xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
             Latest Apps
           </h2>
 
-          <div className="flex flex-col sm:flex-row gap-4 mt-4 md:mt-0">
+          <div className="flex flex-col sm:flex-row gap-4 mt-4 sm:mt-0">
             <motion.input
               whileFocus={{ scale: 1.02 }}
               type="text"
               placeholder="Search apps..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 outline-none"
+              className="px-4 py-2 rounded-lg shadow-sm border border-border bg-card text-card-foreground focus:ring-2 focus:ring-primary/50 outline-none"
             />
 
             <select
               value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value)}
-              className="px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 outline-none"
+              className="px-4 py-2 rounded-lg shadow-sm border border-border bg-card text-card-foreground focus:ring-2 focus:ring-primary/50 outline-none"
             >
               <option value="all">All Categories</option>
               <option value="games">Games</option>
@@ -180,7 +180,7 @@ const LatestAppsSection = () => {
           </div>
         </motion.div>
 
-        {/* Apps Grid */}
+        {/* Apps Grid - Updated card styling */}
         <AnimatePresence mode="wait">
           <motion.div
             key={currentPage}
@@ -194,7 +194,7 @@ const LatestAppsSection = () => {
                 key={index}
                 variants={item}
                 whileHover={{ y: -5 }}
-                className="group relative bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300"
+                className="group relative bg-card/80 backdrop-blur-sm rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-border"
               >
                 <div className="p-4">
                   <div className="flex items-center space-x-4">
@@ -237,7 +237,7 @@ const LatestAppsSection = () => {
           </motion.div>
         </AnimatePresence>
 
-        {/* Pagination */}
+        {/* Pagination - Updated styling */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -246,7 +246,7 @@ const LatestAppsSection = () => {
           <button
             onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 0))}
             disabled={currentPage === 0}
-            className="p-2 rounded-full bg-white shadow-md disabled:opacity-50 hover:bg-gray-100"
+            className="p-2 rounded-full bg-card shadow-md disabled:opacity-50 hover:bg-muted transition-colors"
           >
             <FiChevronLeft className="w-6 h-6" />
           </button>
@@ -256,10 +256,10 @@ const LatestAppsSection = () => {
               <button
                 key={index}
                 onClick={() => setCurrentPage(index)}
-                className={`w-3 h-3 rounded-full ${
+                className={`w-3 h-3 rounded-full transition-colors ${
                   currentPage === index
-                    ? "bg-blue-500"
-                    : "bg-gray-300 hover:bg-gray-400"
+                    ? "bg-primary"
+                    : "bg-gray-300 hover:bg-primary/50"
                 }`}
               />
             ))}
@@ -270,7 +270,7 @@ const LatestAppsSection = () => {
               setCurrentPage((prev) => Math.min(prev + 1, totalPages - 1))
             }
             disabled={currentPage === totalPages - 1}
-            className="p-2 rounded-full bg-white shadow-md disabled:opacity-50 hover:bg-gray-100"
+            className="p-2 rounded-full bg-card shadow-md disabled:opacity-50 hover:bg-muted transition-colors"
           >
             <FiChevronRight className="w-6 h-6" />
           </button>

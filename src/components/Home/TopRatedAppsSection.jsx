@@ -26,6 +26,27 @@ const topRatedApps = [
     image: "https://sbjhub.com/wp-content/uploads/2023/01/unnamed-50-4.webp",
     downloads: "5M+",
   },
+  {
+    name: "Snapchat",
+    version: "12.26.0.20",
+    rating: 4,
+    image: "https://sbjhub.com/wp-content/uploads/2023/03/unnamed-23.png",
+    downloads: "1M+",
+  },
+  {
+    name: "Apnaa Quiz",
+    version: "1.0.8",
+    rating: 4,
+    image: "https://sbjhub.com/wp-content/uploads/2023/11/unnamed-75.webp",
+    downloads: "500K+",
+  },
+  {
+    name: "ShareChat",
+    version: "2023.16",
+    rating: 4,
+    image: "https://sbjhub.com/wp-content/uploads/2023/01/unnamed-50-4.webp",
+    downloads: "5M+",
+  },
 ];
 
 const NextArrow = ({ onClick }) => (
@@ -71,7 +92,7 @@ const TopRatedAppsSection = () => {
         },
       },
       {
-        breakpoint: 640,
+        breakpoint: 550,
         settings: {
           slidesToShow: 1,
         },
@@ -83,35 +104,31 @@ const TopRatedAppsSection = () => {
   };
 
   return (
-    <section className="py-16 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-20 left-20 w-72 h-72 bg-blue-400 rounded-full mix-blend-multiply filter blur-xl animate-blob"></div>
-        <div className="absolute top-40 right-20 w-72 h-72 bg-purple-400 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-2000"></div>
-      </div>
-
-      <div className="container mx-auto px-4 relative">
+    <section className="relative py-8 sm:py-10 lg:py-16 bg-card">
+      <div className="absolute inset-0 bg-gradient-to-b from-background via-card/50 to-background" />
+      <div className="container px-4 relative">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <h2 className="text-4xl font-bold text-gray-900 mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+          <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-secondary to-primary bg-clip-text text-transparent">
             Top Rated Apps
           </h2>
-          <p className="text-gray-600 text-lg">
+          <p className="text-muted-foreground text-lg">
             Discover the most loved apps by our community
           </p>
         </motion.div>
 
-        <div className="relative px-10">
+        <div className="relative">
           <Slider {...settings}>
             {topRatedApps.map((app, index) => (
               <motion.div
                 key={index}
                 onHoverStart={() => setHoveredApp(index)}
                 onHoverEnd={() => setHoveredApp(null)}
-                className="px-4 py-2"
+                className="py-2"
               >
                 <motion.div
                   initial={{ scale: 1 }}
@@ -130,7 +147,9 @@ const TopRatedAppsSection = () => {
                       className="w-16 h-16 rounded-xl shadow-md"
                     />
                     <div>
-                      <h3 className="font-semibold text-lg">{app.name}</h3>
+                      <h3 className="font-semibold text-lg text-black">
+                        {app.name}
+                      </h3>
                       <p className="text-sm text-gray-500">
                         Version {app.version}
                       </p>

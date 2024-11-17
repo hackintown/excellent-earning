@@ -2,7 +2,8 @@ import { motion } from "framer-motion";
 
 const FeaturesSection = () => {
   return (
-    <section className="py-20 bg-white">
+    <section className="py-20 relative bg-background">
+      <div className="absolute inset-0 bg-gradient-to-tr from-secondary/5 via-transparent to-primary/5" />
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <motion.div
